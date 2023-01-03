@@ -1,0 +1,1 @@
+python3 ./.remember_by_folders/index.py
