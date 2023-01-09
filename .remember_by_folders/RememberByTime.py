@@ -1,6 +1,8 @@
 import datetime
 import json
 import os
+from tkinter import *
+from tkinter import messagebox
 
 class RememberByTime:
     def __init__(self, message = "", scheduled_file = "./.remember_by_folders/self_scheduling.json"):
@@ -29,8 +31,10 @@ class RememberByTime:
         next_scheduling = self.__str_to_time(self.__scheduled["weekly"][str(weekday)][time])
 
         if self.__now >= next_scheduling:
-            input(self.__message)
-            os.mkdir(self.__message)
+            messagebox.showinfo("Remember by folders", self.__message)
+            try: 
+                os.mkdir(self.__message)
+            except: pass
             self.__scheduled["weekly"][str(weekday)][time] = self.__time_to_str(next_reminder, "%Y-%m-%d ") + time
 
         self.__save_scheduled()
