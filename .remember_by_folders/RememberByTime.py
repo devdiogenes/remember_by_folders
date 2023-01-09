@@ -13,7 +13,10 @@ class RememberByTime:
 
         self.time = datetime.datetime.strptime(time, "%H:%M")
         current_weekday = int(self.__now.strftime("%w"))
-        days_to_next = ((weekday + 7) - current_weekday) % 7
+        if(current_weekday == weekday): 
+            days_to_next = 7
+        else:
+            days_to_next = ((weekday + 7) - current_weekday) % 7
         next_reminder = self.__now + datetime.timedelta(days = days_to_next)
     
         try: self.__scheduled["weekly"]
@@ -27,6 +30,7 @@ class RememberByTime:
 
         if self.__now >= next_scheduling:
             os.mkdir(self.__message)
+            input(self.__message)
             self.__scheduled["weekly"][str(weekday)][time] = self.__time_to_str(next_reminder, "%Y-%m-%d ") + time
 
         self.__save_scheduled()
