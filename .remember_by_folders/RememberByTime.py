@@ -29,8 +29,8 @@ class RememberByTime:
         next_scheduling = self.__str_to_time(self.__scheduled["weekly"][str(weekday)][time])
 
         if self.__now >= next_scheduling:
-            os.mkdir(self.__message)
             input(self.__message)
+            os.mkdir(self.__message)
             self.__scheduled["weekly"][str(weekday)][time] = self.__time_to_str(next_reminder, "%Y-%m-%d ") + time
 
         self.__save_scheduled()
